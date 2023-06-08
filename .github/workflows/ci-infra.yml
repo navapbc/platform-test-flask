@@ -91,7 +91,7 @@ jobs:
   #     - name: Configure AWS credentials
   #       uses: aws-actions/configure-aws-credentials@v1
   #       with:
-  #         role-to-assume: arn:aws:iam::<ACCOUNT_ID>:role/<PROJECT_NAME>-github-actions
+  #         role-to-assume: arn:aws:iam::806908981117:role/platform-flask-github-actions
   #         aws-region: us-east-1
   #     - name: Run Terratest
   #       run: make infra-test
