@@ -3,6 +3,7 @@ import os
 import urllib.parse
 from typing import Any
 
+import boto3
 import psycopg2
 import sqlalchemy
 import sqlalchemy.pool as pool
@@ -88,16 +89,36 @@ def get_connection_parameters(db_config: PostgresDBConfig) -> dict[str, Any]:
     if environment != "local":
         connect_args["sslmode"] = "require"
 
+    if db_config.password is None:
+        password = generate_iam_auth_token(db_config.aws_region, db_config.host, db_config.port, db_config.username)
+    else:
+        password = db_config.password
+
     return dict(
         host=db_config.host,
         dbname=db_config.name,
         user=db_config.username,
-        password=db_config.password,
+        password=password,
         port=db_config.port,
         options=f"-c search_path={db_config.db_schema}",
         connect_timeout=3,
         **connect_args,
     )
+
+
+def generate_iam_auth_token(aws_region: str, host: str, port: int, user: str) -> str:
+    logger.info(
+        "generating db iam auth token",
+        extra={
+            "aws_region": aws_region,
+            "user": user,
+            "host": host,
+            "port": port,
+        }
+    )
+    client = boto3.client("rds", region_name=aws_region)
+    token = client.generate_db_auth_token(DBHostname=host, Port=port, DBUsername=user, Region=aws_region)
+    return token
 
 
 def make_connection_uri(config: PostgresDBConfig) -> str:
