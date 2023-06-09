@@ -82,12 +82,10 @@ class PostgresDBClient(DBClient):
 
 def get_connection_parameters(db_config: PostgresDBConfig) -> dict[str, Any]:
     connect_args = {}
-    environment = os.getenv("ENVIRONMENT")
-    if not environment:
-        raise Exception("ENVIRONMENT is not set")
 
-    if environment != "local":
-        connect_args["sslmode"] = "require"
+    # TODO set this based on DB_SSLMODE env var instead
+    # if environment != "local":
+    #     connect_args["sslmode"] = "require"
 
     if db_config.password is None:
         assert db_config.aws_region is not None, "AWS region needs to be configured for DB IAM auth if DB password is not configured"
