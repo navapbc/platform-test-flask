@@ -11,6 +11,9 @@ FROM python:3-slim AS release
 RUN pip install --no-cache-dir poetry==1.5
 
 RUN apt-get update \
+    # Install security updates
+    # https://pythonspeed.com/articles/security-updates-in-docker/
+    && apt-get upgrade --yes \
     && apt-get install --no-install-recommends --yes \
     build-essential \
     libpq-dev \
