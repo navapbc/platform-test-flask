@@ -118,7 +118,7 @@ COPY --from=release-build /lib64/* /lib64/
 COPY --from=release-build --chown=${RUN_USER} /tmp/ /tmp/
 
 # By adding the application binary path, you can run scripts defined in the
-# pyproject.toml file as a command directlqy
+# pyproject.toml file as a command directly
 ENV PATH="/app/.venv/bin:$PATH"
 
 # Set the host to 0.0.0.0 to make the server available external
