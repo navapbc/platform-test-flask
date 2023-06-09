@@ -1,5 +1,4 @@
 import logging
-import os
 import urllib.parse
 from typing import Any
 
