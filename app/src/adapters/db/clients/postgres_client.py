@@ -90,6 +90,7 @@ def get_connection_parameters(db_config: PostgresDBConfig) -> dict[str, Any]:
         connect_args["sslmode"] = "require"
 
     if db_config.password is None:
+        assert db_config.aws_region is not None, "AWS region needs to be configured for DB IAM auth if DB password is not configured"
         password = generate_iam_auth_token(db_config.aws_region, db_config.host, db_config.port, db_config.username)
     else:
         password = db_config.password
