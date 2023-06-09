@@ -115,6 +115,7 @@ COPY --from=release-build /lib/* /lib/
 COPY --from=release-build /usr/local/lib/ /usr/local/lib/
 COPY --from=release-build /usr/local/include/python* /usr/local/include/
 COPY --from=release-build /lib64/* /lib64/
+COPY --from=release-build /usr/bin/wget /usr/bin/
 COPY --from=release-build --chown=${RUN_USER} /tmp/ /tmp/
 
 # By adding the application binary path, you can run scripts defined in the
