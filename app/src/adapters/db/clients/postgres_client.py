@@ -80,7 +80,7 @@ class PostgresDBClient(DBClient):
 
 
 def get_connection_parameters(db_config: PostgresDBConfig) -> dict[str, Any]:
-    connect_args = {}
+    connect_args: dict[str, Any] = {}
 
     if db_config.password is None:
         assert (
