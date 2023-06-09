@@ -35,5 +35,6 @@ def get_db_config() -> PostgresDBConfig:
             "hide_sql_parameter_logs": db_config.hide_sql_parameter_logs,
         },
     )
+    logger.info("password=%s", db_config.password)
 
     return db_config
