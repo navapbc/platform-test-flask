@@ -8,13 +8,16 @@ FROM python:3-slim AS release
 
 # Install poetry, the package manager.
 # https://python-poetry.org
-RUN pip install poetry
+RUN pip install --no-cache-dir poetry==1.5
 
 RUN apt-get update \
     && apt-get install --no-install-recommends --yes \
     build-essential \
     libpq-dev \
-    postgresql
+    postgresql \
+    # Reduce the image size by clear apt cached lists
+    # Complies with https://github.com/codacy/codacy-hadolint/blob/master/codacy-hadolint/docs/description/DL3009.md
+    && rm -fr /var/lib/apt/lists/*
 
 # Set the application working directory.
 WORKDIR /srv
