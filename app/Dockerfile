@@ -17,7 +17,8 @@ RUN apt-get update \
     postgresql \
     # Reduce the image size by clear apt cached lists
     # Complies with https://github.com/codacy/codacy-hadolint/blob/master/codacy-hadolint/docs/description/DL3009.md
-    && rm -fr /var/lib/apt/lists/*
+    && rm -fr /var/lib/apt/lists/* \
+    && rm /etc/ssl/private/ssl-cert-snakeoil.key
 
 # Set the application working directory.
 WORKDIR /srv
@@ -36,5 +37,6 @@ ENV HOST=0.0.0.0
 # Install application dependencies.
 # https://python-poetry.org/docs/basic-usage/#installing-dependencies
 RUN poetry install
+
 # Run the application.
 CMD ["poetry", "run", "python", "-m", "src"]
