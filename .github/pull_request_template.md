@@ -1,6 +1,6 @@
 ## Ticket
 
-{TICKET_LINK}
+{LINK TO TICKET}
 
 ## Changes
 > What was added, updated, or removed in this PR.
@@ -10,4 +10,3 @@
 
 ## Testing
 > Screenshots, GIF demos, code examples or output to help show the changes working as expected. ProTip: you can drag and drop or paste images into this textbox.
-
