@@ -57,6 +57,7 @@ with src.logging.init("migrations"):
                 include_schemas=False,
                 include_object=include_object,
                 compare_type=True,
+                version_table_schema=target_metadata.schema,
             )
             with context.begin_transaction():
                 context.run_migrations()
