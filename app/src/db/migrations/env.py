@@ -1,4 +1,5 @@
 import logging
+import os
 from typing import Any
 
 import alembic.context as context
@@ -22,6 +23,8 @@ with src.logging.init("migrations"):
     # from myapp import mymodel
     # target_metadata = mymodel.Base.metadata
     target_metadata = metadata
+
+    target_metadata.schema = os.getenv("DB_SCHEMA")
 
     # other values from the config, defined by the needs of env.py,
     # can be acquired:
@@ -57,7 +60,6 @@ with src.logging.init("migrations"):
                 include_schemas=False,
                 include_object=include_object,
                 compare_type=True,
-                version_table_schema=target_metadata.schema,
             )
             with context.begin_transaction():
                 context.run_migrations()
