@@ -24,8 +24,6 @@ with src.logging.init("migrations"):
     # target_metadata = mymodel.Base.metadata
     target_metadata = metadata
 
-    target_metadata.schema = os.getenv("DB_SCHEMA")
-
     # other values from the config, defined by the needs of env.py,
     # can be acquired:
     # my_important_option = config.get_main_option("my_important_option")
