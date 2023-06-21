@@ -1,5 +1,5 @@
 # PROJECT_NAME defaults to name of the current directory.
-PROJECT_NAME ?= platform-flask
+PROJECT_NAME ?= $(notdir $(PWD))
 
 # For now only support a single app in the folder `app/` within the repo
 # In the future, support multiple apps, and which app is being operated
