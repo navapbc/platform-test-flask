@@ -20,5 +20,5 @@ bind = app_config.host + ':' + str(app_config.port)
 # The recommended number of workers per core is two.
 # https://docs.gunicorn.org/en/latest/design.html#how-many-workers
 # workers = len(os.sched_getaffinity(0)) * 2
-workers = 1
-# threads = 4
+workers = 2
+threads = 2
