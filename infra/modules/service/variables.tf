@@ -30,7 +30,7 @@ variable "cpu" {
 
 variable "memory" {
   type        = number
-  default     = 512
+  default     = 1024
   description = "Amount (in MiB) of memory used by the task. e.g. 2048"
 }
 
