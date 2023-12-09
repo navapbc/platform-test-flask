@@ -4,4 +4,4 @@ This project is used to test the integration of [template-infra](https://github.
 
 ## Environment URLs
 
-* [Dev environment](http://app-dev-1876508187.us-east-1.elb.amazonaws.com/docs)
+* [Dev environment](http://app-dev-828855199.us-east-1.elb.amazonaws.com/docs)
