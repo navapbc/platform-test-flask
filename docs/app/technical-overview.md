@@ -1,11 +1,11 @@
 # Technical Overview
 
-- [Key Technologies](#key-technologies)
-- [Request operations](#request-operations)
-- [Authentication](#authentication)
-- [Authorization](#authorization)
-- [Running In Hosted Environments](#running-in-hosted-environments)
-  - [ECS](#ecs)
+- [Technical Overview](#technical-overview)
+  - [Key Technologies](#key-technologies)
+  - [Request operations](#request-operations)
+  - [Authentication](#authentication)
+  - [Authorization](#authorization)
+    - [Database diagram](#database-diagram)
 
 ## Key Technologies
 
@@ -21,12 +21,11 @@ generally preferred.
 - [OpenAPI Specification][oas-docs]
 - [API Flask][apiflask-home] ([source code][apiflask-src])
 - [SQLAlchemy][sqlalchemy-home] ([source code][sqlalchemy-src])
-- [Alembic][alembic-home] ([source code](alembic-src))
+- [Alembic][alembic-home] ([source code][alembic-src])
 - [pydantic][pydantic-home] ([source code][pydantic-src])
 - [poetry](https://python-poetry.org/docs/) - Python dependency management
 
 [oas-docs]: http://spec.openapis.org/oas/v3.0.3
-[oas-swagger-docs]: https://swagger.io/docs/specification/about/
 
 [apiflask-home]: https://apiflask.com/
 [apiflask-src]: https://github.com/apiflask/apiflask
@@ -38,6 +37,7 @@ generally preferred.
 [sqlalchemy-src]: https://github.com/sqlalchemy/sqlalchemy
 
 [alembic-home]: https://alembic.sqlalchemy.org/en/latest/
+[alembic-src]: https://github.com/sqlalchemy/alembic
 
 ## Request operations
 
