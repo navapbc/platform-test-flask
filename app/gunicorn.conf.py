@@ -15,11 +15,17 @@ from src.app_config import AppConfig
 
 app_config = AppConfig()
 
-bind = app_config.host + ':' + str(app_config.port)
-# Calculates the number of usable cores and doubles it. Recommended number of workers per core is two.
-# https://docs.gunicorn.org/en/latest/design.html#how-many-workers
-# We use 'os.sched_getaffinity(pid)' not 'os.cpu_count()' because it returns only allowable CPUs.
-# os.sched_getaffinity(pid): Return the set of CPUs the process with PID pid is restricted to.
-# os.cpu_count(): Return the number of CPUs in the system.
-workers = len(os.sched_getaffinity(0)) * 2
+bind = app_config.host + ":" + str(app_config.port)
+# Calculates the number of usable cores and doubles it. Recommended number of workers when running in a
+# container is 2 (see https://pythonspeed.com/articles/gunicorn-in-docker/)
+workers = 2
 threads = 4
+
+# Use gevent worker class which is most appropriate for web apps which may make block network requests
+# (like database queries for example). Under the hood, this approach monkeypatches blocking I/O calls
+# with compatible cooperative counterparts from gevent package that allow the worker to switch threads.
+# Read more in the following resources:
+# https://docs.gunicorn.org/en/latest/design.html,
+# https://medium.com/@danieldng/use-gevent-when-your-gunicorn-worker-is-waiting-for-data-180efef96367,
+# https://stackoverflow.com/questions/69372896/gunicorn-with-gevent-performance-gain
+worker_class = "gevent"
