@@ -35,6 +35,9 @@ locals {
 
   service_name = "${local.prefix}${module.app_config.app_name}-${var.environment_name}"
 
+  # Include project name in bucket name since buckets need to be globally unique across AWS
+  bucket_name = "${local.prefix}${module.project_config.project_name}-${module.app_config.app_name}-${var.environment_name}"
+
   environment_config                             = module.app_config.environment_configs[var.environment_name]
   service_config                                 = local.environment_config.service_config
   database_config                                = local.environment_config.database_config
@@ -134,11 +137,14 @@ module "service" {
   } : null
 
   extra_environment_variables = [
+    // TODO: Move API_AUTH_TOKEN to config module
     { name : "API_AUTH_TOKEN", value : "TEST_AUTH_12345678" }, // For demonstration purposes only, do not use this for prod environments
-    { name : "FEATURE_FLAGS_PROJECT", value : module.feature_flags.evidently_project_name }
+    { name : "FEATURE_FLAGS_PROJECT", value : module.feature_flags.evidently_project_name },
+    { name : "BUCKET_NAME", value : local.bucket_name }
   ]
   extra_policies = {
-    "feature_flags_access" = module.feature_flags.access_policy_arn
+    feature_flags_access = module.feature_flags.access_policy_arn,
+    storage_access       = module.storage.access_policy_arn
   }
 }
 
@@ -157,4 +163,9 @@ module "feature_flags" {
   source        = "../../modules/feature-flags"
   service_name  = local.service_name
   feature_flags = module.app_config.feature_flags
+}
+
+module "storage" {
+  source = "../../modules/storage"
+  name   = local.bucket_name
 }
