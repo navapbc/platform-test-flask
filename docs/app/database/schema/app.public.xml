@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><database name="app" schema="public" type="PostgreSQL - 14.10">
+   <tables>
+      <table name="alembic_version" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="version_num" nullable="false" remarks="" size="32" type="varchar" typeCode="12"/>
+         <primaryKey column="version_num" sequenceNumberInPK="1"/>
+         <index name="alembic_version_pkc" unique="true">
+            <column ascending="true" name="version_num"/>
+         </index>
+      </table>
+      <table name="role" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="0" name="created_at" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="1" name="updated_at" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="user_id" nullable="false" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <parent column="id" foreignKey="role_user_id_user_fkey" implied="false" onDeleteCascade="true" schema="public" table="user"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="type" nullable="false" remarks="" size="5" type="varchar" typeCode="12"/>
+         <primaryKey column="user_id" sequenceNumberInPK="1"/>
+         <primaryKey column="type" sequenceNumberInPK="2"/>
+         <index name="role_pkey" unique="true">
+            <column ascending="true" name="user_id"/>
+            <column ascending="true" name="type"/>
+         </index>
+      </table>
+      <table name="user" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <child column="user_id" foreignKey="role_user_id_user_fkey" implied="false" onDeleteCascade="true" schema="public" table="role"/>
+         </column>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="1" name="created_at" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="2" name="updated_at" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="first_name" nullable="false" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="middle_name" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="last_name" nullable="false" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="phone_number" nullable="false" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="date_of_birth" nullable="false" remarks="" size="13" type="date" typeCode="91"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="is_active" nullable="false" remarks="" size="1" type="bool" typeCode="-7"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="user_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+   </tables>
+</database>
