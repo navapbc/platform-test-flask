@@ -12,9 +12,16 @@ locals {
   # Configuration for secrets
   # List of configurations for defining environment variables that pull from SSM parameter
   # store. Configurations are of the format
-  # { name = "ENV_VAR_NAME", ssm_param_name = "/ssm/param/name" }
-  secrets = [{
-    name           = "API_AUTH_TOKEN"
-    ssm_param_name = "/${var.app_name}-${var.environment}/api-auth-token"
-  }]
+  # {
+  #   ENV_VAR_NAME = {
+  #     manage_method     = "generated" # or "manual" for a secret that was created and stored in SSM manually
+  #     secret_store_name = "/ssm/param/name"
+  #   }
+  # }
+  secrets = {
+    API_AUTH_TOKEN = {
+      manage_method     = "generated"
+      secret_store_name = "/${var.app_name}-${var.environment}/api-auth-token"
+    }
+  }
 }
