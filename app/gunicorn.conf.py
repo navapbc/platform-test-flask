@@ -15,11 +15,11 @@ from src.app_config import AppConfig
 
 app_config = AppConfig()
 
-bind = app_config.host + ":" + str(app_config.port)
+bind = app_config.host + ':' + str(app_config.port)
 # Calculates the number of usable cores and doubles it. Recommended number of workers per core is two.
 # https://docs.gunicorn.org/en/latest/design.html#how-many-workers
 # We use 'os.sched_getaffinity(pid)' not 'os.cpu_count()' because it returns only allowable CPUs.
 # os.sched_getaffinity(pid): Return the set of CPUs the process with PID pid is restricted to.
 # os.cpu_count(): Return the number of CPUs in the system.
-workers = 1
-threads = 2
+workers = len(os.sched_getaffinity(0)) * 2
+threads = 4
