@@ -1,2 +1,5 @@
-_commit: f715d8d
+# Changes here will be overwritten by Copier
+_commit: v0.2.0-29-g2dba7c0
 _src_path: https://github.com/navapbc/template-application-flask
+app_local_port: 8080
+app_name: app

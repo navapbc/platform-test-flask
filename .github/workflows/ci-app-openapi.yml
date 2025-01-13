@@ -6,7 +6,7 @@ on:
     paths:
       - app/**
       - Makefile
-      - .github/workflows/ci-openapi.yml
+      - .github/workflows/ci-app-openapi.yml
 
 defaults:
   run:
