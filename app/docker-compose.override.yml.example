@@ -1,6 +1,5 @@
 services:
-
-  main-app:
+  app:
     env_file:
       - local.env
       - .env
