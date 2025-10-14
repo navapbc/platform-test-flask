@@ -1,6 +1,12 @@
 # platform-test-flask
 
-This project is used to test the integration of [template-infra](https://github.com/navapbc/template-infra) and [template-application-flask](https://github.com/navapbc/template-application-flask).
+> **⚠️ This repository is archived.**
+>
+> The Flask application has been migrated to the [platform-test](https://github.com/navapbc/platform-test) repository as `app-flask`. All future development and updates will occur in that repository.
+>
+> This consolidation allows us to test multiple applications within a single infrastructure setup, better reflecting real-world platform usage.
+
+This project was used to test the integration of [template-infra](https://github.com/navapbc/template-infra) and [template-application-flask](https://github.com/navapbc/template-application-flask).
 
 ## Environment URLs
 
